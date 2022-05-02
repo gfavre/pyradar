@@ -1,0 +1,4 @@
+## Runtime configuration for the pyradar application.
+##
+core:
+  logging: WARN
