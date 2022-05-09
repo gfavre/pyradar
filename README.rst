@@ -2,7 +2,8 @@
 pyradar
 =======
 
-This is the pyradar application.
+This is the pyradar application. An app meant to measure speed using a OPS241-A short range radar sensor.
+It is deployed on a raspberry pi (any version)
 
 
 Minimum Requirements
@@ -23,6 +24,8 @@ Optional Requirements
 
 Basic Setup
 ===========
+
+Enable camera using raspi-config
 
 Install for the current user:
 
