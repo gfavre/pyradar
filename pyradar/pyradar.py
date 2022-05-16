@@ -82,7 +82,8 @@ def run(video_dir):
     max_speed = 0.0
     video_path = None
     while True:
-        speed = sensor.readline()
+        speed = sensor.read_speed()
+
         if speed is None:
             if recording:
                 # we were registering a speed break, let's store it
