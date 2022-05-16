@@ -1,55 +1,37 @@
 =======
-pyradar
+PyRadar
 =======
 
-This is the pyradar application. An app meant to measure speed using a OPS241-A short range radar sensor.
-It is deployed on a raspberry pi (any version)
+
+.. image:: https://img.shields.io/pypi/v/pyradar.svg
+        :target: https://pypi.python.org/pypi/pyradar
+
+.. image:: https://img.shields.io/travis/grfavre/pyradar.svg
+        :target: https://travis-ci.com/grfavre/pyradar
+
+.. image:: https://readthedocs.org/projects/pyradar/badge/?version=latest
+        :target: https://pyradar.readthedocs.io/en/latest/?version=latest
+        :alt: Documentation Status
 
 
-Minimum Requirements
-====================
-
-- Python 3.5+
 
 
-Optional Requirements
-=====================
-
-.. _pytest: http://pytest.org
-.. _Sphinx: http://sphinx-doc.org
-
-- `pytest`_ (for running the test suite)
-- `Sphinx`_ (for generating documentation)
+PThis is the pyradar application. An app meant to measure speed using a OPS241-A short range radar sensor.
 
 
-Basic Setup
-===========
-
-Enable camera using raspi-config
-
-Install for the current user:
-
-.. code-block:: console
-
-    $ python -m pip install . --user
+* Free software: MIT license
+* Documentation: https://pyradar.readthedocs.io.
 
 
-Run the application:
+Features
+--------
 
-.. code-block:: console
+* TODO
 
-    $ python -m pyradar --help
+Credits
+-------
 
+This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
 
-Run the test suite:
-
-.. code-block:: console
-   
-    $ pytest test/
-
-
-Build documentation:
-
-.. code-block:: console
-
-    $ sphinx-build -b html doc doc/_build/html
+.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage

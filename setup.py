@@ -1,57 +1,49 @@
-""" Setup script for the pyradar application.
+#!/usr/bin/env python
 
-"""
-from os import walk
-from pathlib import Path
+"""The setup script."""
 
-from setuptools import find_packages
-from setuptools import setup
+from setuptools import setup, find_packages
 
+with open('README.rst') as readme_file:
+    readme = readme_file.read()
 
-_config = {
-    "name": "pyradar",
-    "url": "https://github.com/gfavre/pyradar",
-    "author": "Gregory Favre",
-    "author_email": "greg@beyondthewall.ch",
-    "package_dir": {"": "src"},
-    "packages": find_packages("src"),
-    "entry_points": {
-        "console_scripts": ("pyradar = pyradar.cli:main",),
+with open('HISTORY.rst') as history_file:
+    history = history_file.read()
+
+requirements = ['Click>=7.0', 'picamera', 'pyserial']
+
+test_requirements = [ ]
+
+setup(
+    author="Gregory Favre",
+    author_email='info@beyondthewall.ch',
+    python_requires='>=3.6',
+    classifiers=[
+        'Development Status :: 2 - Pre-Alpha',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: MIT License',
+        'Natural Language :: English',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+    ],
+    description="PThis is the pyradar application. An app meant to measure speed using a OPS241-A short range radar sensor.",
+    entry_points={
+        'console_scripts': [
+            'pyradar=pyradar.cli:main',
+        ],
     },
-    "data_files": ("etc/",),
-}
-
-
-def main() -> int:
-    """ Execute the setup command.
-
-    """
-    def data_files(*paths):
-        """ Expand path contents for the `data_files` config variable.  """
-        for path in map(Path, paths):
-            if path.is_dir():
-                for root, _, files in walk(str(path)):
-                    yield root, tuple(str(Path(root, name)) for name in files)
-            else:
-                yield str(path.parent), (str(path),)
-        return
-
-    def version():
-        """ Get the local package version. """
-        namespace = {}
-        path = Path("src", _config["name"], "__version__.py")
-        exec(path.read_text(), namespace)
-        return namespace["__version__"]
-
-    _config.update({
-        "data_files": list(data_files(*_config["data_files"])),
-        "version": version(),
-    })
-    setup(**_config)
-    return 0
-
-
-# Make the script executable.
-
-if __name__ == "__main__":
-    raise SystemExit(main())
+    install_requires=requirements,
+    license="MIT license",
+    long_description=readme + '\n\n' + history,
+    include_package_data=True,
+    keywords='pyradar',
+    name='pyradar',
+    packages=find_packages(include=['pyradar', 'pyradar.*']),
+    test_suite='tests',
+    tests_require=test_requirements,
+    url='https://github.com/grfavre/pyradar',
+    version='0.1.0',
+    zip_safe=False,
+)
