@@ -27,3 +27,4 @@ def save_event(speed, video_path):
     """
     data_tuple = (datetime.now(), speed, str(video_path))
     cursor.execute(sqlite_insert_with_param, data_tuple)
+    con.commit()
