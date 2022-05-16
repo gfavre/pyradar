@@ -18,7 +18,8 @@ def start_recording(directory):
     dirpath = Path(directory)
     filename = str(time) + ".h264"
     filepath = dirpath / filename
-    camera.start_recording(filepath)
+    with open(filepath, 'wb') as video_file:
+        camera.start_recording(video_file)
     return filepath
 
 
