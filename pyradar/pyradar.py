@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import logging
 from time import time
 
 import serial
@@ -6,6 +7,8 @@ import serial
 from .camera import start_recording, stop_recording
 from .db import save_event, init_db
 
+
+logger = logging.getLogger(__name__)
 
 # Ops241A module settings:  kph, dir off, 20Ksps, min -9dB pwr, squelch 5000
 OPS241A_SPEED_OUTPUT_UNITS = 'UK'
@@ -17,8 +20,8 @@ Ops241A_Module_Information = '??'
 Ops241A_Data_Accuracy = 'F1'
 
 display_max_speed_time = 1
-reset_speed_time = 5
-
+reset_speed_time = 4
+min_speed = 10
 
 class RadarSensor:
     def __init__(self):
@@ -76,11 +79,11 @@ class RadarSensor:
 
 
 def run(video_dir):
-    print(" [*] Waiting for events. To exit press CTRL+C")
+    logger.info(" [*] Waiting for events. To exit press CTRL+C")
     init_db()
     sensor = RadarSensor()
     recording = False
-    max_speed = 0.0
+    max_recorded_speed = 0.0
     video_path = None
     start_time = time()
     while True:
@@ -93,13 +96,15 @@ def run(video_dir):
                     # we were registering a speed break, let's store it
                     stop_recording()
                     recording = False
-                    save_event(max_speed, video_path)
-                    max_speed = 0
-                continue
-        if not recording:
+                    save_event(max_recorded_speed, video_path)
+                    max_recorded_speed = 0
+                    logger.info(f"end of event, max speed: {max_recorded_speed}")
+            continue
+        if not recording and speed > min_speed:
+            logger.info("new event, start recording")
             video_path = start_recording(video_dir)
             recording = True
-            max_speed = speed
+            max_recorded_speed = speed
             start_time = time()
-        if float(speed) > max_speed:
-            max_speed = speed
+        if float(speed) > max_recorded_speed:
+            max_recorded_speed = speed
