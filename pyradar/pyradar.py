@@ -94,5 +94,5 @@ def run(video_dir):
         if not recording:
             video_path = start_recording(video_dir)
             recording = True
-        if speed > max_speed:
+        if float(speed) > max_speed:
             max_speed = speed
