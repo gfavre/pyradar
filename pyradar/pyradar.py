@@ -3,7 +3,7 @@
 import serial
 
 from .camera import start_recording, stop_recording
-from .db import save_event
+from .db import save_event, init_db
 
 
 # Ops241A module settings:  kph, dir off, 20Ksps, min -9dB pwr, squelch 5000
@@ -76,7 +76,7 @@ class RadarSensor:
 
 def run(video_dir):
     print(" [*] Waiting for events. To exit press CTRL+C")
-
+    init_db()
     sensor = RadarSensor()
     recording = False
     max_speed = 0.0
