@@ -7,7 +7,7 @@ DB_PATH = 'radar.db'
 
 
 def init_db(db_path=DB_PATH):
-    con = sqlite3.connect(DB_PATH)
+    con = sqlite3.connect(db_path)
     cursor = con.cursor()
     cursor.execute(f"""
     CREATE TABLE IF NOT EXISTS "{TABLE}"
