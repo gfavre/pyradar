@@ -78,9 +78,9 @@ class RadarSensor:
             return abs(float(rx_bytes))
 
 
-def run(video_dir, min_speed=MIN_SPEED, min_recording_seconds=MIN_RECORDING_SECONDS):
+def run(video_dir, db_path, min_speed=MIN_SPEED, min_recording_seconds=MIN_RECORDING_SECONDS):
     logger.info(" [*] Waiting for events. To exit press CTRL+C")
-    init_db()
+    init_db(db_path)
     sensor = RadarSensor()
     recording = False
     max_recorded_speed = 0.0

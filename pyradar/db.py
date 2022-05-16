@@ -6,7 +6,7 @@ TABLE = "measures"
 DB_PATH = 'radar.db'
 
 
-def init_db():
+def init_db(db_path=DB_PATH):
     con = sqlite3.connect(DB_PATH)
     cursor = con.cursor()
     cursor.execute(f"""
