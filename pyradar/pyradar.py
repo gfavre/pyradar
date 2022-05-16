@@ -74,7 +74,7 @@ class RadarSensor:
             return abs(float(rx_bytes))
 
 
-def run():
+def run(video_dir):
     print(" [*] Waiting for events. To exit press CTRL+C")
 
     sensor = RadarSensor()
@@ -92,7 +92,7 @@ def run():
                 max_speed = 0
             continue
         if not recording:
-            video_path = start_recording()
+            video_path = start_recording(video_dir)
             recording = True
         if speed > max_speed:
             max_speed = speed
