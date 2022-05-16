@@ -5,10 +5,12 @@ import click
 from .pyradar import run
 
 @click.command()
-@click.option('--video-dir', default='~/Documents', type=click.Path(exists=True))
-def main(video_dir):
+@click.option('--video-dir', default='/tmp/pyradar', type=click.Path(), show_default=True, )
+@click.option('--min-speed', default=30.0, type=click.FLOAT, show_default=True)
+@click.option('--min-recording-seconds', default=5.0, type=click.FLOAT, show_default=True)
+def main(video_dir, min_speed, min_recording_seconds):
     """Console script for pyradar."""
-    run(video_dir)
+    run(video_dir=video_dir, min_speed=min_speed, min_recording_seconds=min_recording_seconds)
     # click.echo("See click documentation at https://click.palletsprojects.com/")
     return 0
 

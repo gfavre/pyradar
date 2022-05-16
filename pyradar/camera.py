@@ -16,6 +16,7 @@ def start_recording(directory):
     return: filepath
     """
     dirpath = Path(directory)
+    dirpath.mkdir(exist_ok=True)
     filename = str(time()) + ".h264"
     filepath = dirpath / filename
     camera.start_recording(str(filepath))

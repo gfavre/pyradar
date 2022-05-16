@@ -19,9 +19,9 @@ Ops241A_Threshold_Control = 'QI'
 Ops241A_Module_Information = '??'
 Ops241A_Data_Accuracy = 'F1'
 
-display_max_speed_time = 1
-reset_speed_time = 4
-min_speed = 10
+MIN_RECORDING_SECONDS = 5.0
+MIN_SPEED = 10.0
+
 
 class RadarSensor:
     def __init__(self):
@@ -78,7 +78,7 @@ class RadarSensor:
             return abs(float(rx_bytes))
 
 
-def run(video_dir):
+def run(video_dir, min_speed=MIN_SPEED, min_recording_seconds=MIN_RECORDING_SECONDS):
     logger.info(" [*] Waiting for events. To exit press CTRL+C")
     init_db()
     sensor = RadarSensor()
@@ -91,7 +91,7 @@ def run(video_dir):
 
         if speed is None:
             delta_time = time() - start_time
-            if delta_time > reset_speed_time:
+            if delta_time > min_recording_seconds:
                 if recording:
                     # we were registering a speed break, let's store it
                     stop_recording()
