@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from time import time
 
 import serial
 
@@ -81,19 +82,24 @@ def run(video_dir):
     recording = False
     max_speed = 0.0
     video_path = None
+    start_time = time()
     while True:
         speed = sensor.read_speed()
 
         if speed is None:
-            if recording:
-                # we were registering a speed break, let's store it
-                stop_recording()
-                recording = False
-                save_event(max_speed, video_path)
-                max_speed = 0
-            continue
+            delta_time = time() - start_time
+            if delta_time > reset_speed_time:
+                if recording:
+                    # we were registering a speed break, let's store it
+                    stop_recording()
+                    recording = False
+                    save_event(max_speed, video_path)
+                    max_speed = 0
+                continue
         if not recording:
             video_path = start_recording(video_dir)
             recording = True
+            max_speed = speed
+            start_time = time()
         if float(speed) > max_speed:
             max_speed = speed
