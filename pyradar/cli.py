@@ -11,7 +11,7 @@ from .pyradar import run
 @click.option('--min-recording-seconds', default=5.0, type=click.FLOAT, show_default=True)
 def main(video_dir, db, min_speed, min_recording_seconds):
     """Console script for pyradar."""
-    run(video_dir=video_dir, db_path=db_path, min_speed=min_speed, min_recording_seconds=min_recording_seconds)
+    run(video_dir=video_dir, db_path=db, min_speed=min_speed, min_recording_seconds=min_recording_seconds)
     # click.echo("See click documentation at https://click.palletsprojects.com/")
     return 0
 
