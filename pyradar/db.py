@@ -16,8 +16,8 @@ def init_db(db_path=DB_PATH):
     con.commit()
 
 
-def save_event(speed, video_path):
-    con = sqlite3.connect(DB_PATH)
+def save_event(speed, video_path, db_path=DB_PATH):
+    con = sqlite3.connect(db_path)
     cursor = con.cursor()
     sqlite_insert_with_param = f"""
     INSERT INTO '{TABLE}'

@@ -96,7 +96,7 @@ def run(video_dir, db_path, min_speed=MIN_SPEED, min_recording_seconds=MIN_RECOR
                     # we were registering a speed break, let's store it
                     stop_recording()
                     recording = False
-                    save_event(max_recorded_speed, video_path)
+                    save_event(max_recorded_speed, video_path, db_path)
                     max_recorded_speed = 0
                     logger.info(f"end of event, max speed: {max_recorded_speed}")
             continue
